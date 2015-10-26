@@ -40,19 +40,6 @@ package utils
 			return size;
 		}
 
-		/*public static function getBiggestObgectSize( list : Vector.<AtomData> ) : int
-		 {
-		 var nList : Vector.<AtomData> = list.filter( function ( item : AtomData, index : int, vector : Vector.<AtomData> ) : Boolean {return true} );
-
-		 nList.sort( sortItemsDescending );
-
-		 var value : int = nList[0].diameter;
-
-		 nList = null;
-
-		 return value;
-		 }*/
-
 		public static function sortAtomsDescending( a : Atom, b : Atom ) : int
 		{
 			if ( a.data.radius < b.data.radius )
@@ -90,7 +77,6 @@ package utils
 
 			var p : Number = (size / maxSize) * 100;
 			var bp : Number = ((baseSize < maxSize ? baseSize : maxSize) / maxSize) * 100;
-			//trace(p);
 
 			function percentToRGB( percent ) : Array
 			{

@@ -4,10 +4,10 @@ package
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
+	import flash.events.Event;
 	import flash.system.Capabilities;
 
 	import starling.core.Starling;
-	import starling.events.Event;
 	import starling.textures.RenderTexture;
 
 	[SWF(frameRate=60, backgroundColor='0x000000', width='800', height='600')]
