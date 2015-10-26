@@ -136,7 +136,7 @@ package view
 		public function onGameOver() : void
 		{
 			var tween : Tween = new Tween( this.atomsField, 0.5 );
-			tween.fadeTo( 0 );
+			tween.fadeTo( 0.9 );
 			tween.onComplete = onFadeComplete;
 
 			Starling.juggler.add( tween );

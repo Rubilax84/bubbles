@@ -99,6 +99,15 @@ package model.world
 
 		private function update( event : EnterFrameEvent ) : void
 		{
+
+			_worldObjectsList.sort( Helper.sortItemsDescending );
+			if ( userObject.state == AtomState.NORMAL && int( userObject.radius ) >= int( _worldObjectsList[0].radius ) )
+			{
+				dispatchEvent( new Event( GAME_OVER ) );
+				return;
+			}
+
+
 			/*
 			 * start check collisions
 			 * */
@@ -125,13 +134,6 @@ package model.world
 			for each ( atomData  in _worldObjectsList )
 			{
 				atomData.update();
-			}
-
-			_worldObjectsList.sort( Helper.sortItemsDescending );
-			if ( userObject.state == AtomState.NORMAL && int( userObject.radius ) >= int( _worldObjectsList[0].radius ) )
-			{
-				dispatchEvent( new Event( GAME_OVER ) );
-				return;
 			}
 
 			removeObjects();
