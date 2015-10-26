@@ -5,6 +5,7 @@ package model.world
 {
 
 	import model.world.objects.AtomData;
+	import model.world.objects.AtomState;
 
 	import starling.core.Starling;
 	import starling.events.EnterFrameEvent;
@@ -127,7 +128,7 @@ package model.world
 			}
 
 			_worldObjectsList.sort( Helper.sortItemsDescending );
-			if ( int( userObject.radius ) >= int( _worldObjectsList[0].radius ) )
+			if ( userObject.state == AtomState.NORMAL && int( userObject.radius ) >= int( _worldObjectsList[0].radius ) )
 			{
 				dispatchEvent( new Event( GAME_OVER ) );
 				return;
