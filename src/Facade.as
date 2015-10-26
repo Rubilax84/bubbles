@@ -6,6 +6,7 @@ package
 
 	import controller.AssetsLoadController;
 	import controller.GameFieldController;
+	import controller.GameStateController;
 	import controller.GameWorldController;
 
 	import flash.utils.Dictionary;
@@ -71,6 +72,8 @@ package
 			controllersStorage[GameWorldController.NAME] = new GameWorldController();
 			//add game field controller
 			controllersStorage[GameFieldController.NAME] = new GameFieldController();
+			//add game sate controller
+			controllersStorage[GameStateController.NAME] = new GameStateController();
 
 		}
 

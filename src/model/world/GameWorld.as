@@ -21,6 +21,7 @@ package model.world
 		public static const GAME_WORLD_ACTIVATED : String = 'gameWorldActivated';
 		public static const GAME_WORLD_STOP : String = 'gameWorldStop';
 		public static const GAME_WORLD_UPDATE : String = 'gameWorldUpdate';
+		public static const GAME_OVER : String = 'gameOver';
 
 		private var _worldObjectsList : Vector.<AtomData>;
 		private var placedItems : Vector.<AtomData>;
@@ -111,18 +112,25 @@ package model.world
 						atomData.handleContact( data );
 						data.handleContact( atomData );
 
-						trace( '[ handle contact:', atomData, data, ']' );
+						//trace( '[ handle contact:', atomData, data, ']' );
 					}
 
 				}
 			}
 
 			/*
-			 * move objects
+			 * update objects position and size
 			 * */
 			for each ( atomData  in _worldObjectsList )
 			{
 				atomData.update();
+			}
+
+			_worldObjectsList.sort( Helper.sortItemsDescending );
+			if ( int( userObject.radius ) >= int( _worldObjectsList[0].radius ) )
+			{
+				dispatchEvent( new Event( GAME_OVER ) );
+				return;
 			}
 
 			removeObjects();
@@ -138,6 +146,9 @@ package model.world
 				if ( current.radius <= config.circleSize.removeSize )
 				{
 					_worldObjectsList.splice( _worldObjectsList.indexOf( current ), 1 );
+
+					if ( current.isUserObject )
+						dispatchEvent( new Event( GAME_OVER ) );
 				}
 			}
 		}

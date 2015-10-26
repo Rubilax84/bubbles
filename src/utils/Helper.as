@@ -10,6 +10,8 @@ package utils
 
 	import starling.display.Stage;
 
+	import view.objects.Atom;
+
 	public class Helper
 	{
 		public static function getRandomInt( min : int, max : int ) : int
@@ -38,17 +40,27 @@ package utils
 			return size;
 		}
 
-		public static function getBiggestObgectSize( list : Vector.<AtomData> ) : int
+		/*public static function getBiggestObgectSize( list : Vector.<AtomData> ) : int
+		 {
+		 var nList : Vector.<AtomData> = list.filter( function ( item : AtomData, index : int, vector : Vector.<AtomData> ) : Boolean {return true} );
+
+		 nList.sort( sortItemsDescending );
+
+		 var value : int = nList[0].diameter;
+
+		 nList = null;
+
+		 return value;
+		 }*/
+
+		public static function sortAtomsDescending( a : Atom, b : Atom ) : int
 		{
-			var nList : Vector.<AtomData> = list.filter( function ( item : AtomData, index : int, vector : Vector.<AtomData> ) : Boolean {return true} );
-
-			nList.sort( sortItemsDescending );
-
-			var value : int = nList[0].diameter;
-
-			nList = null;
-
-			return value;
+			if ( a.data.radius < b.data.radius )
+				return 1;
+			else if ( a.data.radius > b.data.radius )
+				return -1;
+			else
+				return 0;
 		}
 
 		public static function sortItemsDescending( a : AtomData, b : AtomData ) : int
@@ -71,6 +83,40 @@ package utils
 		{
 			var hex : uint = data[0] << 16 | data[1] << 8 | data[2];
 			return hex;
+		}
+
+		public static function getColor( size : Number, minSize : Number, maxSize : Number, baseSize : Number, colorsData : Object ) : uint
+		{
+
+			var p : Number = (size / maxSize) * 100;
+			var bp : Number = ((baseSize < maxSize ? baseSize : maxSize) / maxSize) * 100;
+			//trace(p);
+
+			function percentToRGB( percent ) : Array
+			{
+				if ( percent === 100 )
+				{
+					percent = 99
+				}
+				var r : uint, g : uint, b : uint;
+
+				if ( percent < bp )
+				{
+					r = Math.floor( 255 * (percent / 50) );
+					b = 255;
+				}
+				else
+				{
+					r = 255;
+					b = Math.floor( 255 * ((50 - percent % 50) / 50) );
+				}
+
+				g = 0;
+
+				return [r, g, b];
+			}
+
+			return Helper.RGBToHexFromArray( percentToRGB( p ) );
 		}
 	}
 }

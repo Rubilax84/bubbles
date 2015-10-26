@@ -12,7 +12,7 @@ package model.world.objects
 	public class BaseData
 	{
 		protected var speed : Vec2;
-		protected var acceleration : Vec2;
+		protected var _acceleration : Vec2;
 		protected var friction : Number = 0.04;
 
 		protected var _position : Point;
@@ -23,7 +23,7 @@ package model.world.objects
 		public function BaseData( x : Number, y : Number )
 		{
 			_position = new Point( x, y );
-			acceleration = new Vec2();
+			_acceleration = new Vec2();
 			_screenSize = Helper.getScreenSize();
 		}
 
@@ -61,6 +61,16 @@ package model.world.objects
 		public function set isUserObject( value : Boolean ) : void
 		{
 			_isUserObject = value;
+		}
+
+		public function set acceleration( value : Vec2 ) : void
+		{
+			_acceleration = value;
+		}
+
+		public function get acceleration() : Vec2
+		{
+			return _acceleration;
 		}
 	}
 }

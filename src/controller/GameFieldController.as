@@ -23,12 +23,13 @@ package controller
 
 		private var gameField : GameField;
 		private var gameWorld : GameWorld;
-		private var userBubble : AtomData;
+		private var userAtom : AtomData;
 
 		public function GameFieldController()
 		{
 			gameWorld = Facade.instance.dataStorage[GameWorld.NAME];
 			gameWorld.addEventListener( GameWorld.GAME_WORLD_CREATED, gameWorldCreatedHandler );
+			gameWorld.addEventListener( GameWorld.GAME_OVER, gameWorld_gameOverHandler);
 
 			gameField = Facade.instance.viewStorage[GameField.NAME];
 
@@ -36,39 +37,44 @@ package controller
 
 		private function gameWorldCreatedHandler( event : Event ) : void
 		{
-			gameWorld.removeEventListener( GameWorld.GAME_WORLD_CREATED, gameWorldCreatedHandler );
+			//gameWorld.removeEventListener( GameWorld.GAME_WORLD_CREATED, gameWorldCreatedHandler );
 
-			userBubble = gameWorld.userObject;
+			userAtom = gameWorld.userObject;
 			gameField.addEventListener( TouchEvent.TOUCH, touchHandler );
 			gameField.addEventListener( EnterFrameEvent.ENTER_FRAME, enterFrameHandler );
 		}
 
 		private function touchHandler( event : TouchEvent ) : void
 		{
-/*			var touch : Touch = event.getTouch( gameField );
+			var touch : Touch = event.getTouch( gameField );
 
 			if ( !touch ) return;
 
 			if ( touch.phase == TouchPhase.BEGAN )//on finger down
 			{
-				//trace( touch.globalX, touch.globalY );
-				var vec1 : Vec2 = new Vec2( userBubble.x, userBubble.y );
+				var vec1 : Vec2 = new Vec2( userAtom.position.x, userAtom.position.y );
 				var vec2 : Vec2 = new Vec2( touch.globalX, touch.globalY );
 
 				var vec3 : Vec2 = vec1.clone();
 				vec3.subSelf( vec2 );
 				vec3.normalizeSelf();
-				//vec3.scaleSelf( 0.095 );
-				//trace( vec3 );
-				//userBubble.acceleration = vec3.clone();
 
-				userBubble.x = touch.globalX;
-				userBubble.y = touch.globalY;
+				userAtom.acceleration = vec3.clone();
+
+				trace( userAtom.acceleration );
+
+				//userAtom.x = touch.globalX;
+				//userAtom.y = touch.globalY;
 			}
 			else if ( touch.phase == TouchPhase.ENDED ) //on finger up
 			{
-				userBubble.acceleration = new Vec2();
-			}*/
+				userAtom.acceleration = new Vec2();
+			}
+		}
+
+		private function gameWorld_gameOverHandler( event : Event ) : void
+		{
+			gameField.removeEventListener( EnterFrameEvent.ENTER_FRAME, enterFrameHandler );
 		}
 
 		private function enterFrameHandler( event : EnterFrameEvent ) : void

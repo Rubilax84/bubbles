@@ -36,6 +36,9 @@ package model.world.objects
 
 		override protected function move() : void
 		{
+			speed.x += acceleration.x ;
+			speed.y += acceleration.y ;
+
 			position.x += speed.x * friction;
 			position.y += speed.y * friction;
 
