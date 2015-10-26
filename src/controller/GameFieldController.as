@@ -60,11 +60,6 @@ package controller
 				vec3.normalizeSelf();
 
 				userAtom.acceleration = vec3.clone();
-
-				trace( userAtom.acceleration );
-
-				//userAtom.x = touch.globalX;
-				//userAtom.y = touch.globalY;
 			}
 			else if ( touch.phase == TouchPhase.ENDED ) //on finger up
 			{

@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5042681b-24ba-42ce-b4d2-cd460324265e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/starling/starling.swf" afterPath="$PROJECT_DIR$/out/production/starling/starling.swf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/model/world/GameWorld.as" afterPath="$PROJECT_DIR$/src/model/world/GameWorld.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/controller/GameFieldController.as" afterPath="$PROJECT_DIR$/src/controller/GameFieldController.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/utils/Helper.as" afterPath="$PROJECT_DIR$/src/utils/Helper.as" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="starling.iws" />
@@ -40,10 +40,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AtomData.as" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AtomData.as" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/world/objects/AtomData.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.9066667">
+            <state vertical-scroll-proportion="0.0">
               <caret line="38" column="38" selection-start-line="38" selection-start-column="38" selection-end-line="38" selection-end-column="38" />
               <folding>
                 <element signature="e#78#98#0" expanded="true" />
@@ -66,7 +66,7 @@
         <entry file="file://$PROJECT_DIR$/src/utils/Helper.as">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+              <caret line="88" column="32" selection-start-line="88" selection-start-column="32" selection-end-line="88" selection-end-column="32" />
               <folding>
                 <element signature="e#64#88#0" expanded="true" />
               </folding>
@@ -99,11 +99,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GameFieldController.as" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GameFieldController.as" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/controller/GameFieldController.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="76" column="42" selection-start-line="76" selection-start-column="42" selection-end-line="76" selection-end-column="42" />
+            <state vertical-scroll-proportion="0.37037036">
+              <caret line="61" column="53" selection-start-line="61" selection-start-column="53" selection-end-line="61" selection-end-column="53" />
               <folding>
                 <element signature="e#69#98#0" expanded="true" />
               </folding>
@@ -187,12 +187,12 @@
         <option value="$PROJECT_DIR$/src/Facade.as" />
         <option value="$PROJECT_DIR$/src/model/world/objects/BaseData.as" />
         <option value="$PROJECT_DIR$/src/controller/GameStateController.as" />
-        <option value="$PROJECT_DIR$/src/controller/GameFieldController.as" />
         <option value="$PROJECT_DIR$/src/Main.as" />
         <option value="$PROJECT_DIR$/src/assets/config.json" />
-        <option value="$PROJECT_DIR$/src/utils/Helper.as" />
         <option value="$PROJECT_DIR$/src/model/world/GameWorld.as" />
         <option value="$PROJECT_DIR$/src/view/GameField.as" />
+        <option value="$PROJECT_DIR$/src/utils/Helper.as" />
+        <option value="$PROJECT_DIR$/src/controller/GameFieldController.as" />
       </list>
     </option>
   </component>
@@ -732,12 +732,12 @@
       <workItem from="1445760661888" duration="1091000" />
       <workItem from="1445767930723" duration="35298000" />
       <workItem from="1445841817940" duration="19664000" />
-      <workItem from="1445861987235" duration="655000" />
+      <workItem from="1445861987235" duration="1060000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="78865000" />
+    <option name="totallyTimeSpent" value="79270000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="55" y="-8" width="1873" height="1216" extended-state="6" />
@@ -1118,6 +1118,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="30" column="73" selection-start-line="30" selection-start-column="73" selection-end-line="30" selection-end-column="73" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+            <element signature="e#69#100#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1198,16 +1202,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/controller/GameFieldController.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="76" column="42" selection-start-line="76" selection-start-column="42" selection-end-line="76" selection-end-column="42" />
-          <folding>
-            <element signature="e#69#98#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Main.as">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1223,16 +1217,6 @@
         <state vertical-scroll-proportion="-17.0">
           <caret line="26" column="10" selection-start-line="26" selection-start-column="10" selection-end-line="26" selection-end-column="10" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils/Helper.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-          <folding>
-            <element signature="e#64#88#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1260,10 +1244,30 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/world/objects/AtomData.as">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9066667">
+        <state vertical-scroll-proportion="0.0">
           <caret line="38" column="38" selection-start-line="38" selection-start-column="38" selection-end-line="38" selection-end-column="38" />
           <folding>
             <element signature="e#78#98#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utils/Helper.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="88" column="32" selection-start-line="88" selection-start-column="32" selection-end-line="88" selection-end-column="32" />
+          <folding>
+            <element signature="e#64#88#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controller/GameFieldController.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.37037036">
+          <caret line="61" column="53" selection-start-line="61" selection-start-column="53" selection-end-line="61" selection-end-column="53" />
+          <folding>
+            <element signature="e#69#98#0" expanded="true" />
           </folding>
         </state>
       </provider>

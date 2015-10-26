@@ -78,7 +78,7 @@ package utils
 			var p : Number = (size / maxSize) * 100;
 			var bp : Number = ((baseSize < maxSize ? baseSize : maxSize) / maxSize) * 100;
 
-			function percentToRGB( percent ) : Array
+			function percentToRGB( percent : Number ) : Array
 			{
 				if ( percent === 100 )
 				{
