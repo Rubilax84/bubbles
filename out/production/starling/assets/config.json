@@ -1,0 +1,31 @@
+{
+  "gameObjectsCount": 30,
+  "circleSize": {
+    "min": 5,
+    "max": 40,
+    "user": 30,
+    "removeSize": 5
+  },
+  "baseSpeed": 1,
+  "color": {
+    "user": {
+      "color": [
+        0,
+        0,
+        255
+      ]
+    },
+    "enemy": {
+      "color1": [
+        0,
+        120,
+        255
+      ],
+      "color2": [
+        255,
+        0,
+        12
+      ]
+    }
+  }
+}
