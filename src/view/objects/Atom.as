@@ -57,6 +57,8 @@ package view.objects
 
 		public function setColor( color : uint ) : void
 		{
+			if ( this.color == color ) return;
+
 			this.color = color != 0 ? color : Math.random() * 0xffffff;
 
 			drawBackground();
