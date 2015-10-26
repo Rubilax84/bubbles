@@ -11,25 +11,35 @@ package model.world.objects
 
 	public class BaseData
 	{
-		private var _isUserObject : Boolean;
-		protected var _x : Number;
-		protected var _y : Number;
+		protected var speed : Vec2;
+		protected var acceleration : Vec2;
+		protected var friction : Number = 0.04;
+
 		protected var _position : Point;
+		protected var _screenSize : Point;
 
-		public var speed : Vec2;
-		public var acceleration : Vec2;
-		public var friction : Number = 0.04;
-
-		protected var screenSize : Point;
+		private var _isUserObject : Boolean;
 
 		public function BaseData( x : Number, y : Number )
 		{
-			this._x = x;
-			this._y = y;
-
 			_position = new Point( x, y );
 			acceleration = new Vec2();
-			screenSize = Helper.getScreenSize();
+			_screenSize = Helper.getScreenSize();
+		}
+
+		public function update() : void
+		{
+
+		}
+
+		protected function move() : void
+		{
+
+		}
+
+		public function handleContact( data : BaseData ) : void
+		{
+
 		}
 
 		public function get position() : Point
@@ -37,26 +47,10 @@ package model.world.objects
 			return _position;
 		}
 
-		public function get x() : Number
+		public function setPosition( x : Number, y : Number ) : void
 		{
-			return _x;
-		}
-
-		public function set x( value : Number ) : void
-		{
-			_x = value;
-			_position.x = _x;
-		}
-
-		public function get y() : Number
-		{
-			return _y;
-		}
-
-		public function set y( value : Number ) : void
-		{
-			_y = value;
-			_position.y = _y;
+			_position.x = x;
+			_position.y = y;
 		}
 
 		public function get isUserObject() : Boolean

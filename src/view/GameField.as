@@ -5,7 +5,7 @@ package view
 {
 
 	import model.world.GameWorld;
-	import model.world.objects.CircleData;
+	import model.world.objects.AtomData;
 
 	import starling.display.Canvas;
 	import starling.display.Sprite;
@@ -13,14 +13,14 @@ package view
 	import utils.GlobalConstants;
 	import utils.Helper;
 
-	import view.objects.CircleViewObject;
+	import view.objects.Atom;
 
 	public class GameField extends Sprite
 	{
 		public static const NAME : String = 'GameField';
 
 		private var display : Sprite;
-		private var objectsList : Vector.<CircleViewObject>;
+		private var objectsList : Vector.<Atom>;
 		private var config : Object;
 
 		public function GameField( display : Sprite )
@@ -31,7 +31,7 @@ package view
 			this.y = 0;
 
 			this.display.addChild( this );
-			objectsList = new <CircleViewObject>[];
+			objectsList = new <Atom>[];
 
 			addBack();
 		}
@@ -50,7 +50,7 @@ package view
 		public function initialize() : void
 		{
 			config = Facade.instance.assetsManager.getObject( GlobalConstants.CONFIG_OBJECT_NAME );
-			var objectsData : Vector.<CircleData> = (Facade.instance.dataStorage[GameWorld.NAME] as GameWorld).worldObjectsList;
+			var objectsData : Vector.<AtomData> = (Facade.instance.dataStorage[GameWorld.NAME] as GameWorld).worldObjectsList;
 
 			for ( var i : int = 0; i < objectsData.length; i++ )
 			{
@@ -58,9 +58,9 @@ package view
 			}
 		}
 
-		private function drawObject( data : CircleData ) : void
+		private function drawObject( data : AtomData ) : void
 		{
-			var gameObject : CircleViewObject = new CircleViewObject( data );
+			var gameObject : Atom = new Atom( data );
 
 			gameObject.setColor( data.isUserObject ? Helper.RGBToHexFromArray( config.color.user.color ) : 0 );
 
@@ -71,9 +71,9 @@ package view
 
 		public function updateField() : void
 		{
-			for each ( var viewObject : CircleViewObject in objectsList )
+			for each ( var viewObject : Atom in objectsList )
 			{
-				if ( viewObject.data.r <= config.circleSize.removeSize )
+				if ( viewObject.data.radius <= config.circleSize.removeSize )
 				{
 					objectsList.splice( objectsList.indexOf( viewObject ), 1 );
 					viewObject.removeFromParent( true );

@@ -6,13 +6,13 @@ package utils
 
 	import flash.geom.Point;
 
-	import model.world.objects.CircleData;
+	import model.world.objects.AtomData;
 
 	import starling.display.Stage;
 
 	public class Helper
 	{
-		public static function getRandomInt( min : int, max : int ) : Number
+		public static function getRandomInt( min : int, max : int ) : int
 		{
 			return Math.round( Math.random() * (max - min) + min );
 		}
@@ -38,24 +38,24 @@ package utils
 			return size;
 		}
 
-		public static function getBiggestObgectSize( list : Vector.<CircleData> ) : int
+		public static function getBiggestObgectSize( list : Vector.<AtomData> ) : int
 		{
-			var nList : Vector.<CircleData> = list.filter( function ( item : CircleData, index : int, vector : Vector.<CircleData> ) : Boolean {return true} );
+			var nList : Vector.<AtomData> = list.filter( function ( item : AtomData, index : int, vector : Vector.<AtomData> ) : Boolean {return true} );
 
 			nList.sort( sortItemsDescending );
 
-			var value : int = nList[0].d;
+			var value : int = nList[0].diameter;
 
 			nList = null;
 
 			return value;
 		}
 
-		public static function sortItemsDescending( a : CircleData, b : CircleData ) : int
+		public static function sortItemsDescending( a : AtomData, b : AtomData ) : int
 		{
-			if ( a.r < b.r )
+			if ( a.radius < b.radius )
 				return 1;
-			else if ( a.r > b.r )
+			else if ( a.radius > b.radius )
 				return -1;
 			else
 				return 0;

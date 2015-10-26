@@ -5,7 +5,7 @@ package controller
 {
 
 	import model.world.GameWorld;
-	import model.world.objects.CircleData;
+	import model.world.objects.AtomData;
 
 	import starling.events.EnterFrameEvent;
 	import starling.events.Event;
@@ -23,7 +23,7 @@ package controller
 
 		private var gameField : GameField;
 		private var gameWorld : GameWorld;
-		private var userBubble : CircleData;
+		private var userBubble : AtomData;
 
 		public function GameFieldController()
 		{
@@ -45,7 +45,7 @@ package controller
 
 		private function touchHandler( event : TouchEvent ) : void
 		{
-			var touch : Touch = event.getTouch( gameField );
+/*			var touch : Touch = event.getTouch( gameField );
 
 			if ( !touch ) return;
 
@@ -59,13 +59,16 @@ package controller
 				vec3.subSelf( vec2 );
 				vec3.normalizeSelf();
 				//vec3.scaleSelf( 0.095 );
-				trace( vec3 );
-				userBubble.acceleration = vec3.clone();
+				//trace( vec3 );
+				//userBubble.acceleration = vec3.clone();
+
+				userBubble.x = touch.globalX;
+				userBubble.y = touch.globalY;
 			}
 			else if ( touch.phase == TouchPhase.ENDED ) //on finger up
 			{
 				userBubble.acceleration = new Vec2();
-			}
+			}*/
 		}
 
 		private function enterFrameHandler( event : EnterFrameEvent ) : void

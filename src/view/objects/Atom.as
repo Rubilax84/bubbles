@@ -4,54 +4,46 @@
 package view.objects
 {
 
-	import model.world.objects.CircleData;
+	import model.world.objects.AtomData;
 
 	import starling.display.Canvas;
 	import starling.display.Image;
 	import starling.display.Sprite;
-	import starling.filters.ColorMatrixFilter;
+	import starling.filters.BlurFilter;
 	import starling.textures.Texture;
 
 	import utils.GlobalConstants;
 
-	public class CircleViewObject extends Sprite
+	public class Atom extends Sprite
 	{
-		public var data : CircleData;
+		public var data : AtomData;
 		private var radius : int;
 		private var canvas : Canvas;
 		private var objectImage : Image;
-		private var colorFilter : ColorMatrixFilter;
 		private var color : uint;
 
-		public function CircleViewObject( data : CircleData )
+		public function Atom( data : AtomData )
 		{
 			this.data = data;
-			this.radius = data.r;
-			var texture : Texture = Facade.instance.assetsManager.getTexture( GlobalConstants.BUBLE_FILE_NAME.split( '.' )[0] );
+			this.radius = data.radius;
 
 			color = Math.random() * 0xffffff;
 
-			colorFilter = new ColorMatrixFilter();
+			canvas = new Canvas();
+			canvas.alpha = 1;
+			canvas.filter = new BlurFilter( 1, 1, 3 );
+			addChild( canvas );
 
+			var texture : Texture = Facade.instance.assetsManager.getTexture( GlobalConstants.BUBLE_FILE_NAME.split( '.' )[0] );
 			objectImage = new Image( texture );
-			objectImage.scaleX = data.d / objectImage.texture.width;
+			objectImage.scaleX = data.diameter / objectImage.texture.width;
 			objectImage.scaleY = objectImage.scaleX;
 			objectImage.alignPivot();
 
-			//objectImage.filter = new BlurFilter( 1, 1, 4 );
 			addChild( objectImage );
 
-			canvas = new Canvas();
-			canvas.alpha = 1;
-			canvas.touchable = false;
-			//canvas.filter = new BlurFilter( 1, 1, 3 );
-			addChildAt( canvas, 0 );
-
-			//this.filter = colorFilter;
-
-			this.x = data.x;
-			this.y = data.y;
-
+			this.x = data.position.x;
+			this.y = data.position.y;
 			this.touchable = false;
 		}
 
@@ -59,27 +51,25 @@ package view.objects
 		{
 			canvas.clear();
 			canvas.beginFill( color );
-			canvas.drawCircle( 0, 0, data.isUserObject ? data.r* 0.9 : data.r * 0.6 );
+			canvas.drawCircle( 0, 0, data.isUserObject ? data.radius * 0.9 : data.radius * 0.6 );
 			canvas.endFill();
 		}
 
 		public function setColor( color : uint ) : void
 		{
 			this.color = color != 0 ? color : Math.random() * 0xffffff;
-			colorFilter.tint( color );
-			drawBackground();
 
-			//this.flatten( true );
+			drawBackground();
 		}
 
 		public function update() : void
 		{
-			this.x = data.x;
-			this.y = data.y;
+			this.x = data.position.x;
+			this.y = data.position.y;
 
-			if ( data.r != radius )
+			if ( data.radius != radius )
 			{
-				objectImage.scaleX = (data.r * 2) / objectImage.texture.width;
+				objectImage.scaleX = (data.radius * 2) / objectImage.texture.width;
 				objectImage.scaleY = objectImage.scaleX;
 
 				drawBackground();

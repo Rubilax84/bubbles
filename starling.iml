@@ -3,7 +3,7 @@
   <component name="FlexBuildConfigurationManager" active="starling">
     <configurations>
       <configuration name="starling" pure-as="true" main-class="Main" output-file="starling.swf" output-folder="$MODULE_DIR$/out/production/starling">
-        <dependencies target-player="19.0">
+        <dependencies target-player="18.0">
           <entries>
             <entry library-id="1958406c-6793-4acf-960a-18e92198daa3">
               <dependency linkage="Merged" />
