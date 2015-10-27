@@ -101,8 +101,8 @@ package view
 
 			for each ( var atom : Atom in eList )
 			{
-				var color : uint = Helper.getColor( atom.data.radius, eList[eList.length - 1].data.radius, eList[0].data.radius, userAtom.data.radius, config.color.enemy );
-				atom.setColor( color );
+				//var color : uint = Helper.getColor( atom.data.radius, eList[eList.length - 1].data.radius, eList[0].data.radius, userAtom.data.radius, config.color.enemy );
+				//atom.setColor( color );
 			}
 
 			for each ( viewObject in objectsList )

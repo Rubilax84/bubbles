@@ -13,6 +13,7 @@ package model.world.objects
 		private var _newRadius : Number;
 		private var _diameter : Number;
 		private var _state : int;
+		private var baseSpeed : Number;
 
 		public function AtomData( x : Number, y : Number, r : int, baseSpeed : Number )
 		{
@@ -20,12 +21,15 @@ package model.world.objects
 
 			this._radius = r;
 			this._diameter = r * 2;
-
+			this.baseSpeed = baseSpeed;
 			this.speed = new Vec2();
 			this.speed.x = Helper.getRandomNumber( -baseSpeed, baseSpeed );
 			this.speed.y = Helper.getRandomNumber( -baseSpeed, baseSpeed );
 
 			_state = AtomState.NORMAL;
+
+			var a : Number = Math.abs( speed.x );
+			trace();
 		}
 
 		override public function update() : void
@@ -36,11 +40,25 @@ package model.world.objects
 
 		override protected function move() : void
 		{
-			speed.x += acceleration.x ;
-			speed.y += acceleration.y ;
+			speed.x += acceleration.x;
+			speed.y += acceleration.y;
 
 			position.x += speed.x * friction;
 			position.y += speed.y * friction;
+
+			if ( Math.abs( speed.x ) > baseSpeed )
+			{
+				var d : Number = (speed.x / Math.abs( speed.x )) * -1;
+
+				speed.x += 0.09 * d;
+			}
+
+			if ( Math.abs( speed.y ) > baseSpeed )
+			{
+				var d : Number = (speed.y / Math.abs( speed.y )) * -1;
+
+				speed.y += 0.09 * d;
+			}
 
 			/*
 			 * check wall collision
@@ -66,7 +84,7 @@ package model.world.objects
 			}
 			else if ( this.state == AtomState.DECREASE )
 			{
-				_newRadius = 5;
+				_newRadius = 3;
 			}
 
 		}
