@@ -5,6 +5,7 @@ package view.objects
 {
 
 	import model.world.objects.AtomData;
+	import model.world.objects.AtomState;
 
 	import starling.display.Canvas;
 	import starling.display.Image;
@@ -71,11 +72,17 @@ package view.objects
 
 			if ( data.radius != radius )
 			{
+				if ( this.isFlattened && data.state != AtomState.NORMAL )
+					this.unflatten();
+
 				objectImage.scaleX = (data.radius * 2) / objectImage.texture.width;
 				objectImage.scaleY = objectImage.scaleX;
 
 				drawBackground();
 			}
+
+			if ( !this.isFlattened && data.state == AtomState.NORMAL )
+				this.flatten();
 		}
 
 		override public function dispose() : void

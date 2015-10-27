@@ -4,6 +4,8 @@
 package model.world
 {
 
+	import flash.utils.getTimer;
+
 	import model.world.objects.AtomData;
 	import model.world.objects.AtomState;
 
@@ -99,29 +101,28 @@ package model.world
 
 		private function update( event : EnterFrameEvent ) : void
 		{
-
+			var t : uint = getTimer();
 			_worldObjectsList.sort( Helper.sortItemsDescending );
 			if ( userObject.state == AtomState.NORMAL && int( userObject.radius ) >= int( _worldObjectsList[0].radius ) )
 			{
-				dispatchEvent( new Event( GAME_OVER ) );
+				//dispatchEvent( new Event( GAME_OVER ) );
 				return;
 			}
 
 			/*
 			 * start check collisions
 			 * */
+			var data : AtomData;
 			for each ( atomData in _worldObjectsList )
 			{
 				for ( var i : int = 0; i < _worldObjectsList.length; i++ )
 				{
-					var data : AtomData = _worldObjectsList[i];
+					data = _worldObjectsList[i];
 
 					if ( atomData != data && collisionDetect( atomData, data ) )
 					{
 						atomData.handleContact( data );
 						data.handleContact( atomData );
-
-						//trace( '[ handle contact:', atomData, data, ']' );
 					}
 
 				}
@@ -136,6 +137,8 @@ package model.world
 			}
 
 			removeObjects();
+
+			trace( 'update time:', getTimer() - t );
 		}
 
 		private function removeObjects() : void
