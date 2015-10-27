@@ -27,9 +27,6 @@ package model.world.objects
 			this.speed.y = Helper.getRandomNumber( -baseSpeed, baseSpeed );
 
 			_state = AtomState.NORMAL;
-
-			var a : Number = Math.abs( speed.x );
-			trace();
 		}
 
 		override public function update() : void
@@ -50,14 +47,14 @@ package model.world.objects
 			{
 				var d : Number = (speed.x / Math.abs( speed.x )) * -1;
 
-				speed.x += 0.09 * d;
+				speed.x += 0.06 * d;
 			}
 
 			if ( Math.abs( speed.y ) > baseSpeed )
 			{
 				var d : Number = (speed.y / Math.abs( speed.y )) * -1;
 
-				speed.y += 0.09 * d;
+				speed.y += 0.06 * d;
 			}
 
 			/*
@@ -73,7 +70,7 @@ package model.world.objects
 		{
 			var atomData : AtomData = data as AtomData;
 
-			this.state = ( this.radius >= atomData.radius ) ? AtomState.INCREASE : this.state = AtomState.DECREASE;
+			this.state = ( this.radius >= atomData.radius ) ? AtomState.INCREASE : AtomState.DECREASE;
 
 			if ( this.state == AtomState.INCREASE )
 			{
