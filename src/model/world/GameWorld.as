@@ -107,7 +107,6 @@ package model.world
 				return;
 			}
 
-
 			/*
 			 * start check collisions
 			 * */
@@ -171,11 +170,6 @@ package model.world
 		public static function collisionDetect( a : AtomData, b : AtomData ) : Boolean
 		{
 			var distance : Number = Math.sqrt( (b.position.x - a.position.x) * (b.position.x - a.position.x) + (b.position.y - a.position.y) * (b.position.y - a.position.y) );
-
-			if ( distance < 0 )
-			{
-				distance = distance * -1;
-			}
 
 			return distance <= a.radius + b.radius;
 		}
