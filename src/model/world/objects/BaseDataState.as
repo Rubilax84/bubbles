@@ -4,7 +4,7 @@
 package model.world.objects
 {
 
-	public class AtomState
+	public class BaseDataState
 	{
 		public static const INCREASE : int = 1;
 		public static const DECREASE : int = -1;

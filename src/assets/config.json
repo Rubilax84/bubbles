@@ -1,8 +1,8 @@
 {
-  "gameObjectsCount": 150,
+  "gameObjectsCount": 100,
   "circleSize": {
     "min": 5,
-    "max": 20,
+    "max": 30,
     "user": 15,
     "removeSize": 3
   },

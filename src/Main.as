@@ -10,6 +10,8 @@ package
 	import starling.core.Starling;
 	import starling.textures.RenderTexture;
 
+	import utils.math.Gauss;
+
 	[SWF(frameRate=60, backgroundColor='0x000000', width='800', height='600')]
 	public class Main extends Sprite
 	{
@@ -37,7 +39,7 @@ package
 
 			_starling.start();
 
-			//addChild( new Stats() );
 		}
+
 	}
 }

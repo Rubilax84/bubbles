@@ -7,7 +7,7 @@ package model.world
 	import flash.utils.getTimer;
 
 	import model.world.objects.AtomData;
-	import model.world.objects.AtomState;
+	import model.world.objects.BaseDataState;
 
 	import starling.core.Starling;
 	import starling.events.EnterFrameEvent;
@@ -31,10 +31,15 @@ package model.world
 		private var config : Object;
 		private var _userObject : AtomData;
 		private var atomData : AtomData;
+		private var worldWidth : Number;
+		private var worldHeight : Number;
 
 		public function GameWorld()
 		{
 			_worldObjectsList = new <AtomData>[];
+
+			worldWidth = Starling.current.stage.stageWidth;
+			worldHeight = Starling.current.stage.stageHeight;
 		}
 
 		public function create() : void
@@ -61,31 +66,36 @@ package model.world
 
 			rearrange();
 
-			dispatchEvent( new Event( GAME_WORLD_CREATED ) );
+			dispatchEventWith( GAME_WORLD_CREATED );
 
 			activate();
 		}
 
 		public function rearrange() : void
 		{
+			var t : uint = getTimer();
+			var circleData : AtomData;
+
 			placedItems = new <AtomData>[];
 			_worldObjectsList.sort( Helper.sortItemsDescending );
 
 			for ( var i : int = 0; i < _worldObjectsList.length; i++ )
 			{
-				var circleData : AtomData = _worldObjectsList[i];
+				circleData = _worldObjectsList[i];
 				setRightPosition( circleData );
 
 				placedItems.push( circleData );
 			}
 
 			placedItems = null;
+
+			trace( 'rearrange time:', getTimer() - t );
 		}
 
 		private function setRightPosition( data : AtomData ) : void
 		{
-			var x : Number = Helper.getRandomInt( data.radius, Starling.current.stage.stageWidth - data.radius );
-			var y : Number = Helper.getRandomInt( data.radius, Starling.current.stage.stageHeight - data.radius );
+			var x : Number = Helper.getRandomNumber( data.radius, worldWidth - data.radius );
+			var y : Number = Helper.getRandomNumber( data.radius, worldHeight - data.radius );
 
 			data.setPosition( x, y );
 
@@ -101,11 +111,12 @@ package model.world
 
 		private function update( event : EnterFrameEvent ) : void
 		{
-			var t : uint = getTimer();
+			return;
+			//var t : uint = getTimer();
 			_worldObjectsList.sort( Helper.sortItemsDescending );
-			if ( userObject.state == AtomState.NORMAL && int( userObject.radius ) >= int( _worldObjectsList[0].radius ) )
+			if ( userObject.state == BaseDataState.NORMAL && int( userObject.radius ) >= int( _worldObjectsList[0].radius ) )
 			{
-				//dispatchEvent( new Event( GAME_OVER ) );
+				dispatchEventWith( GAME_OVER );
 				return;
 			}
 
@@ -113,19 +124,36 @@ package model.world
 			 * start check collisions
 			 * */
 			var data : AtomData;
+			var collisionDetected : Boolean;
 			for each ( atomData in _worldObjectsList )
 			{
+				collisionDetected = false;
+
 				for ( var i : int = 0; i < _worldObjectsList.length; i++ )
 				{
 					data = _worldObjectsList[i];
 
+					if ( atomData == data ) continue;
+
 					if ( atomData != data && collisionDetect( atomData, data ) )
 					{
 						atomData.handleContact( data );
-						data.handleContact( atomData );
+						//data.handleContact( atomData );
+						collisionDetected = true;
+					}
+					else if ( data in atomData.collisionList )
+					{
+						atomData.removeCollisionObject( data );
 					}
 
 				}
+
+				if ( !collisionDetected )
+				{
+					atomData.clearCollisions();
+					atomData.state = BaseDataState.NORMAL;
+				}
+
 			}
 
 			/*
@@ -133,12 +161,12 @@ package model.world
 			 * */
 			for each ( atomData  in _worldObjectsList )
 			{
-				atomData.update();
+				//atomData.update();
 			}
 
 			removeObjects();
 
-			trace( 'update time:', getTimer() - t );
+			//trace( 'update time:', getTimer() - t );
 		}
 
 		private function removeObjects() : void
@@ -153,7 +181,7 @@ package model.world
 					_worldObjectsList.splice( _worldObjectsList.indexOf( current ), 1 );
 
 					if ( current.isUserObject )
-						dispatchEvent( new Event( GAME_OVER ) );
+						dispatchEventWith( GAME_OVER );
 				}
 			}
 		}

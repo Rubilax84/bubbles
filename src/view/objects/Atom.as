@@ -5,15 +5,13 @@ package view.objects
 {
 
 	import model.world.objects.AtomData;
-	import model.world.objects.AtomState;
+	import model.world.objects.BaseDataState;
 
+	import starling.core.RenderSupport;
 	import starling.display.Canvas;
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.filters.BlurFilter;
-	import starling.textures.Texture;
-
-	import utils.GlobalConstants;
 
 	public class Atom extends Sprite
 	{
@@ -35,8 +33,7 @@ package view.objects
 			canvas.filter = new BlurFilter( 1, 1, 3 );
 			addChild( canvas );
 
-			var texture : Texture = Facade.instance.assetsManager.getTexture( GlobalConstants.BUBLE_FILE_NAME.split( '.' )[0] );
-			objectImage = new Image( texture );
+			objectImage = new Image( Facade.instance.assetsManager.getAtomTexture() );
 			objectImage.scaleX = data.diameter / objectImage.texture.width;
 			objectImage.scaleY = objectImage.scaleX;
 			objectImage.alignPivot();
@@ -67,12 +64,17 @@ package view.objects
 
 		public function update() : void
 		{
+
+		}
+
+		override public function render( support : RenderSupport, parentAlpha : Number ) : void
+		{
 			this.x = data.position.x;
 			this.y = data.position.y;
 
 			if ( data.radius != radius )
 			{
-				if ( this.isFlattened && data.state != AtomState.NORMAL )
+				if ( this.isFlattened && data.state != BaseDataState.NORMAL )
 					this.unflatten();
 
 				objectImage.scaleX = (data.radius * 2) / objectImage.texture.width;
@@ -81,8 +83,10 @@ package view.objects
 				drawBackground();
 			}
 
-			if ( !this.isFlattened && data.state == AtomState.NORMAL )
+			if ( !this.isFlattened && data.state == BaseDataState.NORMAL )
 				this.flatten();
+
+			super.render( support, parentAlpha );
 		}
 
 		override public function dispose() : void

@@ -19,6 +19,7 @@ package view
 	import utils.Helper;
 
 	import view.objects.Atom;
+	import view.objects.Polygon;
 
 	public class GameField extends Sprite
 	{
@@ -79,7 +80,15 @@ package view
 
 		private function drawObject( data : AtomData ) : void
 		{
-			var atom : Atom = new Atom( data );
+
+			var poly : Polygon = new Polygon( data.radius, 10, Math.random() * 0xffffff );
+
+			poly.x = data.position.x;
+			poly.y = data.position.y;
+
+			this.atomsField.addChild( poly );
+
+			/*var atom : Atom = new Atom( data );
 
 			atom.setColor( data.isUserObject ? Helper.RGBToHexFromArray( config.color.user.color ) : 0 );
 
@@ -87,23 +96,24 @@ package view
 
 			this.atomsField.addChild( atom );
 
-			if ( data.isUserObject ) userAtom = atom;
+			if ( data.isUserObject ) userAtom = atom;*/
 		}
 
 		public function updateField() : void
 		{
+			return;
 			/*
 			 * update atoms colors
 			 * */
-			var eList : Vector.<Atom> = objectsList.filter( getEnemyAtomsList );
+			/*var eList : Vector.<Atom> = objectsList.filter( getEnemyAtomsList );
 
-			eList.sort( Helper.sortAtomsDescending );
+			 eList.sort( Helper.sortAtomsDescending );
 
-			for each ( var atom : Atom in eList )
-			{
-				var color : uint = Helper.getColor( atom.data.radius, eList[eList.length - 1].data.radius, eList[0].data.radius, userAtom.data.radius, config.color.enemy );
-				atom.setColor( color );
-			}
+			 for each ( var atom : Atom in eList )
+			 {
+			 var color : uint = Helper.getColor( atom.data.radius, eList[eList.length - 1].data.radius, eList[0].data.radius, userAtom.data.radius, config.color.enemy );
+			 atom.setColor( color );
+			 }*/
 
 			for each ( viewObject in objectsList )
 			{
@@ -111,10 +121,10 @@ package view
 				{
 					objectsList.splice( objectsList.indexOf( viewObject ), 1 );
 					viewObject.removeFromParent( true );
-					continue;
+					//continue;
 				}
 
-				viewObject.update();
+				//viewObject.update();
 			}
 		}
 
